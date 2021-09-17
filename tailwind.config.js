@@ -2,9 +2,13 @@
 module.exports = {
   
     purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-    darkMode: false, // or 'media' or 'class'
+    darkMode: false, 
     theme: {
       extend: {
+     
+        fontFamily:{
+          roboto:"'Roboto',sans-serif"
+        },
         colors: {
           headerColor: "#121926",
           subscribe_btn:"#1f80e0",
@@ -23,10 +27,8 @@ module.exports = {
         h2:"392px",
         h3:"396px",
         h4:"562px",
-       
-        h4:"800px",
-        h41:"900px",
-        // h5:"1294px"
+        h41:"800px",
+        h42:"900px",
       },
       inset:{
         i1:"21rem",
@@ -39,13 +41,11 @@ module.exports = {
         w7:"650px",
       },
     
-     
-    //   backgroundImage: {
-    //    'hero-lg': "url('./public/images/landing-background.jpg')",
-    //  },
     },
     variants: {
-      extend: {},
+      extend: {
+        backgroundColor: ['active'],
+      },
     },
     plugins: [
       require('tailwind-scrollbar-hide')
