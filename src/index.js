@@ -7,6 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import "react-loading-skeleton/dist/skeleton.css";
 import "./style/index.css";
 import "./style/style.css";
 
