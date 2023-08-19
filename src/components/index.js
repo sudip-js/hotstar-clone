@@ -5,3 +5,5 @@ export { default as Slider } from "./Slider";
 export { default as Footer } from "./Footer";
 export { default as Row } from "./Row";
 export { default as MovieDetails } from "./MovieDetails";
+export { default as AuthForm } from "./AuthForm";
+export { default as AuthImage } from "./AuthImage";

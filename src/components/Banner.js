@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from "react";
-import axios from "../services/axios";
-import requests from "../services/requests";
+import React, { useState } from "react";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import { useQuery } from "@tanstack/react-query";
+import { fetchBanner } from "../services";
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
 const Banner = () => {
   const [banner, setBanner] = useState([]);
-  const [trailerunavailable, setTrailerunavailable] = useState(false);
-
+  const [trailerUnavailable, setTrailerUnavailable] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("");
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await axios.get(requests?.fetchNetFlixOriginals);
-      if (res.data.results) {
+  useQuery({
+    queryKey: ["fetch-banner"],
+    queryFn: fetchBanner,
+    select: (data) => data?.data,
+    onSuccess: (data) => {
+      if (data?.results) {
         setBanner(
-          res?.data?.results[
-            Math.floor(Math.random() * res?.data?.results?.length - 1)
-          ]
+          data.results[Math.floor(Math.random() * data.results?.length - 1)]
         );
       } else {
-        console.log("OPPS ! Temporarily Unavailable ");
+        console.error("Unavailable");
       }
-
-      return res;
-    }
-    fetchData();
-  }, []);
+    },
+  });
 
   const opts = {
     height: "250",
@@ -38,21 +34,21 @@ const Banner = () => {
     },
   };
 
-  const playTrailer = (bannerdetails) => {
+  const playTrailer = (bannerDetails) => {
     if (trailerUrl) {
       setTrailerUrl("");
     } else {
       movieTrailer(
-        bannerdetails?.title ||
-          bannerdetails?.original_title ||
-          bannerdetails?.name ||
+        bannerDetails?.title ||
+          bannerDetails?.original_title ||
+          bannerDetails?.name ||
           ""
       )
         .then((url) => {
           const urlParams = new URLSearchParams(new URL(url)?.search);
           setTrailerUrl(urlParams.get("v"));
         })
-        .catch(() => setTrailerunavailable(true));
+        .catch(() => setTrailerUnavailable(true));
     }
   };
 
@@ -109,7 +105,7 @@ const Banner = () => {
             </button>
           </div>
         </div>
-        {trailerunavailable && (
+        {trailerUnavailable && (
           <h1 className=" text-sm font-medium text-gray-400">
             OPPS Temporarily Unavailable !
           </h1>

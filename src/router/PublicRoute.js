@@ -1,12 +1,11 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PublicRoute = () => {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  const user = useSelector(({ auth }) => auth?.user);
+  if (user?.firebase_uid) return <Navigate to="/dashboard" />;
+  return <Outlet />;
 };
 
 export default PublicRoute;

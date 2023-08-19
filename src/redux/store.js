@@ -1,12 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./features/userSlice";
-import movieinfoReducer from "./features/movieinfoSlice";
-import movieReducer from "./features/movieSlice";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
+import { rootReducer } from "./rootReducer";
 
-export const store = configureStore({
-  reducer: {
-    user: userReducer,
-    movieinfo: movieinfoReducer,
-    movie: movieReducer,
-  },
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: [thunk],
 });
+
+const persistor = persistStore(store);
+export { store, persistor };

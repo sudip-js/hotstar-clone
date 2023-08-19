@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { login, logout, selectUser } from "../redux/features/userSlice";
+import { login, logout, selectUser } from "../redux/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../config/firebase";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

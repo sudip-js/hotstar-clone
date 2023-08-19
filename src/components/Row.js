@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../services/axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { movieInformation } from "../redux/features/movieinfoSlice";
+import { movieInformation } from "../redux/features/movieInfoSlice";
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
@@ -15,6 +15,7 @@ const Row = ({ title, fetchUrl }) => {
     try {
       async function fetchData() {
         const request = await axios.get(fetchUrl);
+        console.log({ request });
         setMovies(request.data.results);
 
         return request;
@@ -71,8 +72,8 @@ const Row = ({ title, fetchUrl }) => {
             </h1>
           </div>
 
-          <div className="posters px-1 py-2 flex space-x-2  overflow-y-hidden  overflow-x-scroll lg:px-0 ">
-            {movies.map((movie) => (
+          <div className="posters px-1 py-2 flex space-x-2  overflow-y-hidden  overflow-x-scroll lg:px-0 hide-scrollbar">
+            {movies?.map((movie) => (
               <img
                 src={`${baseUrl}${movie?.poster_path}`}
                 alt={movie?.title}

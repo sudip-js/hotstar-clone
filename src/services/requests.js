@@ -1,5 +1,5 @@
 const requests = {
-  fetchTreding: `/trending/all/week?api_key=${process.env.REACT_APP_TMDB_ApiKey}&language=en-US`,
+  fetchTrending: `/trending/all/week?api_key=${process.env.REACT_APP_TMDB_ApiKey}&language=en-US`,
 
   fetchNetFlixOriginals: `/discover/tv?api_key=${process.env.REACT_APP_TMDB_ApiKey}&with_networks=213`,
 

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const movieinfoSlice = createSlice({
-  name: "movieinfo",
+export const movieInfoSlice = createSlice({
+  name: "movieInfo",
   initialState: {
     details: {},
   },
@@ -12,8 +12,5 @@ export const movieinfoSlice = createSlice({
   },
 });
 
-export const { movieInformation } = movieinfoSlice.actions;
-
-export const selectMovieinfo = (state) => state?.movieinfo?.details;
-
-export default movieinfoSlice.reducer;
+export const { movieInformation } = movieInfoSlice.actions;
+export default movieInfoSlice.reducer;
