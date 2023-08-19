@@ -3,31 +3,16 @@ import axios from "../services/axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { movieInformation } from "../redux/features/movieInfoSlice";
+import { Spinner } from "react-bootstrap";
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
-const Row = ({ title, fetchUrl }) => {
+const Row = ({ title, movies }) => {
+  console.log({ movies });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    try {
-      async function fetchData() {
-        const request = await axios.get(fetchUrl);
-        console.log({ request });
-        setMovies(request.data.results);
-
-        return request;
-      }
-      fetchData();
-    } catch {
-      console.log("temperoraily unavailable");
-    }
-  }, [fetchUrl]);
 
   const movieDetails = (movie) => {
-    console.log({ movie });
     const {
       original_title = null,
       original_name = null,
@@ -73,7 +58,7 @@ const Row = ({ title, fetchUrl }) => {
           </div>
 
           <div className="posters px-1 py-2 flex space-x-2  overflow-y-hidden  overflow-x-scroll lg:px-0 hide-scrollbar">
-            {movies?.map((movie) => (
+            {movies?.data?.map((movie) => (
               <img
                 src={`${baseUrl}${movie?.poster_path}`}
                 alt={movie?.title}

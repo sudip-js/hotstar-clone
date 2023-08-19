@@ -11,7 +11,6 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log({ user });
         const { displayName, email, phoneNumber, photoURL, uid } = user;
         dispatch(
           login({

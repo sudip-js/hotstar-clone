@@ -1,59 +1,35 @@
 import React from "react";
 import { Banner, Footer, Header, Row, Slider } from "../../components";
 import requests from "../../services/requests";
+import { useQueries } from "@tanstack/react-query";
+import { apiClient } from "../../services/axios";
 
 const Dashboard = () => {
+  const fetchUrls = Object.values(requests);
+  const results = useQueries({
+    queries: fetchUrls?.map((fetchUrl) => ({
+      queryKey: [fetchUrl],
+      queryFn: async () => {
+        const response = await apiClient({
+          method: "GET",
+          url: fetchUrl,
+        });
+        return response;
+      },
+      select: (data) => data?.data?.results,
+    })),
+  });
+
   return (
     <>
       <Header />
       <Banner />
       <Slider />
-
-      <Row title="Latest & Trending" fetchUrl={requests.fetchTreding} />
-
-      <Row title="Popular Shows" fetchUrl={requests.fetchPopularShows} />
-
-      <Row
-        title="Movies Recommended For You"
-        fetchUrl={requests.fetchTopRatedMovies}
-      />
-
-      <Row
-        title="Shows Recommended For You"
-        fetchUrl={requests.fetchTopRatedShows}
-      />
-
-      <Row title="Popular  Movies" fetchUrl={requests.fetchPopularMovies} />
-
-      <Row title="Popular in Action" fetchUrl={requests.fetchActionMovies} />
-
-      <Row title="Popular in Comedy " fetchUrl={requests.fetchComedyMovies} />
-
-      <Row title="Best of Horrar" fetchUrl={requests.fetchHorroMovies} />
-
-      <Row
-        title=" Popular in Romance "
-        fetchUrl={requests.fetchRomanticMovies}
-      />
-
-      <Row title="Popular in Mystery" fetchUrl={requests.fetchMysteryMovies} />
-
-      <Row title="Popular in Western " fetchUrl={requests.fetchWesternMovies} />
-
-      <Row
-        title="Best of Animation "
-        fetchUrl={requests.fetchAnimationMovies}
-      />
-
-      <Row title="Quix Shows" fetchUrl={requests.fetchTv} />
-
-      <Row title="Best of Superheroes" fetchUrl={requests.fetchSciFi} />
-
-      <Row
-        title="Popular in Documentaries"
-        fetchUrl={requests.fetchDocumentaries}
-      />
-
+      {requests && Object.keys(requests)?.length > 0
+        ? Object.keys(requests).map((key, index) => (
+            <Row key={key} title={key} movies={results?.[index]} />
+          ))
+        : null}
       <Footer />
     </>
   );
