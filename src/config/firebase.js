@@ -1,19 +1,19 @@
-import firebase from "firebase";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_Firebase_ApiKey,
-  authDomain: process.env.REACT_APP_Firebase_AuthDomain,
-  projectId: process.env.REACT_APP_Firebase_ProjectId,
-  storageBucket: process.env.REACT_APP_Firebase_StorageBucket,
-  messagingSenderId: process.env.REACT_APP_Firebase_MessagingSenderId,
-  appId: process.env.REACT_APP_Firebase_AppId,
-  measurementId: process.env.REACT_APP_Firebase_MeasurementId,
+  apiKey: "AIzaSyAxpzMT6IiGWM-0hAkl8u08Vo9HyqdNPPI",
+  authDomain: "disney-hotstar-869f6.firebaseapp.com",
+  projectId: "disney-hotstar-869f6",
+  storageBucket: "disney-hotstar-869f6.appspot.com",
+  messagingSenderId: "481368966064",
+  appId: "1:481368966064:web:1d482ff02bcc1fd19a0c75",
+  measurementId: "G-KVB95SMD8F",
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-const auth = firebase.auth();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-const facebookProvider = new firebase.auth.FacebookAuthProvider();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
-export { auth, db, googleProvider, facebookProvider };
+export { auth, googleProvider };

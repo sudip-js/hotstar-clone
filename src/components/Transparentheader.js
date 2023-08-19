@@ -3,17 +3,17 @@ import { MenuIcon, SearchIcon } from "@heroicons/react/solid";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import { auth } from "../config/firebase";
-import { Redirect, Link, useHistory } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 
 const Transparentheader = () => {
-  let history = useHistory();
+  const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
   const user = useSelector(selectUser);
 
   const signOut = () => {
     auth.signOut();
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   };
   const onInputChange = (e) => {
     setSearch(e.target.value);
@@ -33,7 +33,7 @@ const Transparentheader = () => {
             src="../../images/disneyhotstar.svg"
             className=" object-contain mb-3   w-32 lg:h-16 lg:w-40 "
             alt="Disney Hotstar"
-            onClick={() => history.push("/disney-hotstar")}
+            onClick={() => navigate("/disney-hotstar")}
           />
         </div>
 

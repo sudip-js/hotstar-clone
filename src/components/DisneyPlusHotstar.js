@@ -12,7 +12,7 @@ import Row from "./Row";
 import Footer from "./Footer";
 import requests from "../services/requests";
 import { Redirect } from "react-router-dom";
-import Moviedetails from "./Moviedetails";
+// import Moviedetails from "./Moviedetails";
 
 const DisneyPlusHotstar = () => {
   const dispatch = useDispatch();
@@ -128,7 +128,7 @@ const DisneyPlusHotstar = () => {
             </Route>
 
             <Route exact path="/disney-hotstar/movies/:id">
-              <Moviedetails />
+              {/* <Moviedetails /> */}
             </Route>
 
             <Redirect to="/disney-hotstar" />

@@ -3,7 +3,7 @@ import Transparentheader from "./Transparentheader";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import AddIcon from "@material-ui/icons/Add";
 import { selectUser } from "../redux/features/userSlice";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectMovieinfo } from "../redux/features/movieinfoSlice";
 import YouTube from "react-youtube";
@@ -12,15 +12,14 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
-const Moviedetails = () => {
- 
+const MovieDetails = () => {
   const [trailerUrl, setTrailerUrl] = useState("");
   const information = useSelector(selectMovieinfo);
 
   const user = useSelector(selectUser);
   useEffect(() => {
     if (!user) {
-      <Redirect to="/" />;
+      <Navigate to="/" />;
     }
   }, [user]);
 
@@ -46,7 +45,7 @@ const Moviedetails = () => {
           const urlParams = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParams.get("v"));
         })
-        .catch(() =>console.log(" movie trailer is not available !") );
+        .catch(() => console.log(" movie trailer is not available !"));
     }
   };
 
@@ -70,7 +69,7 @@ const Moviedetails = () => {
               />
             </div>
           )}
-        
+
           {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
           <div className=" pb-60  lg:pt-0 lg:pb-0 lg:absolute top-72 left-10 lg:w-96 pl-3 ">
             <div className=" ">
@@ -135,4 +134,4 @@ const Moviedetails = () => {
   );
 };
 
-export default Moviedetails;
+export default MovieDetails;

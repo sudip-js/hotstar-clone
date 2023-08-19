@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../services/axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { movieInformation } from "../redux/features/movieinfoSlice";
 
@@ -8,7 +8,7 @@ const baseUrl = "https://image.tmdb.org/t/p/original";
 
 const Row = ({ title, fetchUrl }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -26,6 +26,13 @@ const Row = ({ title, fetchUrl }) => {
   }, [fetchUrl]);
 
   const movieDetails = (movie) => {
+    console.log({ movie });
+    const {
+      original_title = null,
+      original_name = null,
+      title = null,
+      id = null,
+    } = movie;
     dispatch(
       movieInformation({
         name: movie.name,
@@ -41,9 +48,14 @@ const Row = ({ title, fetchUrl }) => {
         vote_average: movie.vote_average,
       })
     );
-    history.push({
-      pathname: `/disney-hotstar/movies/${movie.id}`,
-    });
+
+    const pathTitle =
+      title?.replaceAll(" ", "-") ||
+      original_title?.replaceAll(" ", "-") ||
+      original_name?.replaceAll(" ", "-");
+
+    const path = `${pathTitle?.toLowerCase()}?${id}`;
+    navigate(`/dashboard/${path}`);
   };
 
   return (
