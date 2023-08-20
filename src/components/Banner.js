@@ -4,18 +4,21 @@ import movieTrailer from "movie-trailer";
 import { useQuery } from "@tanstack/react-query";
 import { fetchBanner } from "../services";
 
-const baseUrl = "https://image.tmdb.org/t/p/original";
+const IMAGE_BASE_URL = process.env.REACT_APP_TMDB_API__IMAGE_BASE_URL;
 
 const Banner = () => {
   const [banner, setBanner] = useState([]);
   const [trailerUnavailable, setTrailerUnavailable] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("");
 
+  console.log({ banner });
+
   useQuery({
     queryKey: ["fetch-banner"],
     queryFn: fetchBanner,
     select: (data) => data?.data,
     onSuccess: (data) => {
+      console.log({ data });
       if (data?.results) {
         setBanner(
           data.results[Math.floor(Math.random() * data.results?.length - 1)]
@@ -58,7 +61,9 @@ const Banner = () => {
         {!trailerUrl && (
           <div className="  w-full  lg:mx-5">
             <img
-              src={`${baseUrl}${banner?.backdrop_path || banner?.poster_path}`}
+              src={`${IMAGE_BASE_URL}${
+                banner?.backdrop_path || banner?.poster_path
+              }`}
               className=" border-2 border-gray-600 border-opacity-100 rounded h-48 object-cover  w-full sm:object-cover md:object-cover "
               alt={
                 banner?.title ||

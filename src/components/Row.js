@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux";
 import { movieInformation } from "../redux/features/movieInfoSlice";
 import Skeleton from "react-loading-skeleton";
 
-const baseUrl = "https://image.tmdb.org/t/p/original";
-
+const IMAGE_BASE_URL = process.env.REACT_APP_TMDB_API__IMAGE_BASE_URL;
 const Row = ({ title, movies }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -104,7 +103,7 @@ const Row = ({ title, movies }) => {
             <div className="posters px-1 py-2 flex space-x-2  overflow-y-hidden  overflow-x-scroll lg:px-0 hide-scrollbar">
               {movies?.data?.map((movie) => (
                 <img
-                  src={`${baseUrl}${movie?.poster_path}`}
+                  src={`${IMAGE_BASE_URL}${movie?.poster_path}`}
                   alt={movie?.title}
                   className="cursor-pointer rounded-lg h-40 w-28 object-cover lg:w-40 lg:h-56"
                   key={movie?.id}

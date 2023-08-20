@@ -1,10 +1,11 @@
 import axios from "axios";
+const baseURL = process.env.REACT_APP_TMDB_API_BASE_URL;
 const instance = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
+  baseURL,
 });
 
 export const apiClient = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
+  baseURL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json; charset=utf-8",

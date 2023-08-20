@@ -4,7 +4,7 @@ import requests from "./requests";
 export const fetchBanner = () => {
   return apiClient({
     method: "GET",
-    url: requests?.fetchNetFlixOriginals,
+    url: requests["Netflix Originals"],
   });
 };
 export const fetchMovies = ({ url }) => {

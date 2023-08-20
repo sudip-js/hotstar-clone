@@ -7,8 +7,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BackIcon } from "../assets/icons";
-const baseUrl = "https://image.tmdb.org/t/p/original";
 
+const IMAGE_BASE_URL = process.env.REACT_APP_TMDB_API__IMAGE_BASE_URL;
 const opts = {
   width: "100%",
   height: "750px",
@@ -60,7 +60,7 @@ const MovieDetails = () => {
         {!trailerUrl && (
           <div className="">
             <img
-              src={`${baseUrl}${
+              src={`${IMAGE_BASE_URL}${
                 information?.backdrop_path || information?.poster_path
               }`}
               alt={information?.title}

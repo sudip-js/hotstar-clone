@@ -3,18 +3,17 @@ import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAxpzMT6IiGWM-0hAkl8u08Vo9HyqdNPPI",
-  authDomain: "disney-hotstar-869f6.firebaseapp.com",
-  projectId: "disney-hotstar-869f6",
-  storageBucket: "disney-hotstar-869f6.appspot.com",
-  messagingSenderId: "481368966064",
-  appId: "1:481368966064:web:1d482ff02bcc1fd19a0c75",
-  measurementId: "G-KVB95SMD8F",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
-
 export { auth, googleProvider, githubProvider };
