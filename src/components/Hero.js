@@ -39,7 +39,7 @@ const Hero = () => {
           Start Streaming Now
         </p>
 
-        <Link to="/login">
+        <Link to="/sign-in">
           <button className=" uppercase bg-subscribe_btn py-2 px-12 cursor-pointer rounded font-semibold text-lg tracking-wider lg:px-48 lg:py-2 lg:text-4xl lg:font-bold ">
             get started
           </button>

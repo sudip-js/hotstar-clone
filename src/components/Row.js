@@ -7,7 +7,6 @@ import Skeleton from "react-loading-skeleton";
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
 const Row = ({ title, movies }) => {
-  console.log({ movies });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -61,6 +60,8 @@ const Row = ({ title, movies }) => {
                   width: "300px",
                 }}
                 containerClassName="flex"
+                baseColor="#47454D"
+                highlightColor="#47454D"
               />
               <Skeleton
                 style={{
@@ -68,6 +69,8 @@ const Row = ({ title, movies }) => {
                   width: "50px",
                 }}
                 containerClassName="flex"
+                baseColor="#47454D"
+                highlightColor="#47454D"
               />
             </div>
           )}
@@ -91,6 +94,8 @@ const Row = ({ title, movies }) => {
                     height: "14rem",
                     width: "10rem",
                   }}
+                  baseColor="#47454D"
+                  highlightColor="#47454D"
                 />
               ))}
             </div>
@@ -101,7 +106,7 @@ const Row = ({ title, movies }) => {
                 <img
                   src={`${baseUrl}${movie?.poster_path}`}
                   alt={movie?.title}
-                  className=" cursor-pointer rounded-lg h-40 w-28 object-cover lg:w-40 lg:h-56"
+                  className="cursor-pointer rounded-lg h-40 w-28 object-cover lg:w-40 lg:h-56"
                   key={movie?.id}
                   onClick={() => movieDetails(movie)}
                 />

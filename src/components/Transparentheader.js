@@ -46,7 +46,7 @@ const Transparentheader = () => {
       <div className="  flex  items-center mr-1 lg:mr-0 lg:px-10 ">
         <div className=" relative ">
           {!user ? (
-            <Link to="/login">
+            <Link to="/sign-in">
               <h1 className="focus:outline-none mx-4 my-1 uppercase font-semibold text-base tracking-wider cursor-pointer mr-2  lg:mr-5 ">
                 login
               </h1>

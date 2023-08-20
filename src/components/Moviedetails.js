@@ -26,7 +26,6 @@ const MovieDetails = () => {
   const information = useSelector(({ movieInfo }) => movieInfo?.details);
 
   const playTrailer = (information) => {
-    console.log({ information });
     if (trailerUrl) {
       setTrailerUrl("");
     } else {
@@ -43,7 +42,6 @@ const MovieDetails = () => {
         })
         .catch(() => {
           setIsTrailerExist(false);
-          console.log(" movie trailer is not available !");
         });
     }
   };
@@ -55,8 +53,6 @@ const MovieDetails = () => {
     if (!location?.search) return;
     playTrailer(information);
   }, [location?.search, information]);
-
-  console.log({ trailerUrl });
 
   return (
     <div className=" min-h-screen bg-black">
