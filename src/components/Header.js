@@ -1,5 +1,4 @@
 import React from "react";
-import { MenuIcon, SearchIcon } from "@heroicons/react/solid";
 import { auth } from "../config/firebase";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks";
@@ -21,7 +20,12 @@ const Header = () => {
         }
       });
     } catch (error) {
-      console.error({ error: error?.message });
+      swal({
+        type: "danger",
+        text: error?.message ?? "Something went wrong!",
+        icon: "error",
+        timer: 3000,
+      });
     }
   };
 

@@ -45,67 +45,20 @@ const Row = ({ title, movies }) => {
     <div className="lg:px-12 lg:mt-2 lg:p-0">
       <section>
         <div className=" flex flex-col space-y-1">
-          {movies?.status === "loading" && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Skeleton
-                style={{
-                  height: "2rem",
-                  width: "300px",
-                }}
-                containerClassName="flex"
-                baseColor="#47454D"
-                highlightColor="#47454D"
-              />
-              <Skeleton
-                style={{
-                  height: "1.5rem",
-                  width: "50px",
-                }}
-                containerClassName="flex"
-                baseColor="#47454D"
-                highlightColor="#47454D"
-              />
-            </div>
-          )}
-          {movies?.status === "success" && (
+          {movies?.status === "fulfilled" && (
             <div className="px-1  flex justify-between items-center lg:px-0">
               <h1 className=" cursor-pointer hover:text-subscribe_btn transition duration-500 text-lg font-medium">
                 {title}
               </h1>
-              <h1 className=" uppercase text-sm font-medium text-subscribe_btn opacity-100">
-                more
-              </h1>
             </div>
           )}
-
-          {movies?.status === "loading" && (
+          {movies?.status === "fulfilled" && (
             <div className="posters px-1 py-2 flex space-x-2  overflow-y-hidden  overflow-x-scroll lg:px-0 hide-scrollbar">
-              {Array.from({ length: 20 }).map((_, index) => (
-                <Skeleton
-                  key={index}
-                  style={{
-                    height: "14rem",
-                    width: "10rem",
-                  }}
-                  baseColor="#47454D"
-                  highlightColor="#47454D"
-                />
-              ))}
-            </div>
-          )}
-          {movies?.status === "success" && (
-            <div className="posters px-1 py-2 flex space-x-2  overflow-y-hidden  overflow-x-scroll lg:px-0 hide-scrollbar">
-              {movies?.data?.map((movie) => (
+              {movies?.data?.results?.map((movie) => (
                 <img
                   src={`${IMAGE_BASE_URL}${movie?.poster_path}`}
                   alt={movie?.title}
-                  className="cursor-pointer rounded-lg h-40 w-28 object-cover lg:w-40 lg:h-56"
+                  className="cursor-pointer rounded-lg h-40 w-28 object-cover lg:w-36 lg:h-56"
                   key={movie?.id}
                   onClick={() => movieDetails(movie)}
                 />

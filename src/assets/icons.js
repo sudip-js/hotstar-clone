@@ -1,5 +1,6 @@
 export {
   AiFillEyeInvisible as EyeClose,
   AiFillEye as EyeOpen,
-  AiFillStepBackward as BackIcon,
 } from "react-icons/ai";
+
+export { IoIosArrowBack as BackIcon } from "react-icons/io";

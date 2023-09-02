@@ -73,14 +73,15 @@ const MovieDetails = () => {
         {!trailerUrl && (
           <button
             type="button"
-            className="btn bg-white text-black lg:absolute top-10 left-10 rounded-full p-2"
+            className="btn bg-white text-black lg:absolute top-10 left-10 p-2 w-20 flex items-center font-medium text-sm"
             onClick={() => navigate("/dashboard")}
           >
             <BackIcon
               style={{
-                fontSize: "1.5rem",
+                fontSize: "1rem",
               }}
             />
+            Back
           </button>
         )}
 
@@ -111,6 +112,12 @@ const MovieDetails = () => {
                 </div>
               </div>
 
+              <div className="w-96">
+                <p className=" text-lg text-gray-300">
+                  {truncate(information?.overview, 250)}
+                </p>
+              </div>
+
               {isTrailerExist ? (
                 <div className=" flex items-center space-x-2">
                   <div
@@ -124,17 +131,11 @@ const MovieDetails = () => {
                     )}
 
                     <button className=" relative  w-16 left-2 font-medium text-sm  ">
-                      {!trailerUrl ? "Play" : "back"}
+                      {!trailerUrl ? "Play" : "Back"}
                     </button>
                   </div>
                 </div>
               ) : null}
-
-              <div className="  w-72">
-                <p className=" text-xs text-gray-300">
-                  {truncate(information?.overview, 250)}
-                </p>
-              </div>
             </div>
           </>
         </div>

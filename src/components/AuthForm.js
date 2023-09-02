@@ -4,8 +4,9 @@ import { EyeClose, EyeOpen } from "../assets/icons";
 import { signInWithPopup } from "firebase/auth";
 import { auth, githubProvider, googleProvider } from "../config/firebase";
 import { Spinner } from "react-bootstrap";
-import swal from "sweetalert";
 import { useState } from "react";
+import swal from "sweetalert";
+import { handleFetchDataFromUrls } from "../utils";
 
 const AuthForm = ({
   title = "",
@@ -24,13 +25,16 @@ const AuthForm = ({
   const navigate = useNavigate();
   const handleSocialAuth = async ({ type = "google" }) => {
     try {
-      if (type === "google") {
-        await signInWithPopup(auth, googleProvider);
-      } else if (type === "github") {
-        await signInWithPopup(auth, githubProvider);
-      }
+      if (type === "google") await signInWithPopup(auth, googleProvider);
+      if (type === "github") await signInWithPopup(auth, githubProvider);
+      await handleFetchDataFromUrls();
     } catch (error) {
-      console.error({ error });
+      swal({
+        type: "danger",
+        text: error?.message ?? "Something went wrong!",
+        icon: "error",
+        timer: 3000,
+      });
     }
   };
   return (

@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import swal from "sweetalert";
 import { useState } from "react";
+import { handleFetchDataFromUrls } from "../../utils";
 
 export const signUpInitialState = {
   email: "",
@@ -48,8 +49,8 @@ const SignIn = () => {
     }));
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      await handleFetchDataFromUrls();
     } catch (error) {
-      console.error({ error });
       swal({
         type: "danger",
         text: error?.message ?? "Something went wrong!",

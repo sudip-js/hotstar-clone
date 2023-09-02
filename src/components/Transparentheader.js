@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { MenuIcon, SearchIcon } from "@heroicons/react/solid";
+import React from "react";
 import { auth } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks";
@@ -9,7 +8,6 @@ import swal from "sweetalert";
 const Transparentheader = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
   const handleLogout = async () => {
     try {
       swal({
@@ -23,11 +21,13 @@ const Transparentheader = () => {
         }
       });
     } catch (error) {
-      console.error({ error: error?.message });
+      swal({
+        type: "danger",
+        text: error?.message ?? "Something went wrong!",
+        icon: "error",
+        timer: 3000,
+      });
     }
-  };
-  const onInputChange = (e) => {
-    setSearch(e.target.value);
   };
 
   return (

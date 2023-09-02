@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import swal from "sweetalert";
+import { handleFetchDataFromUrls } from "../../utils";
 
 export const signUpInitialState = {
   email: "",
@@ -48,8 +49,8 @@ const SignUp = () => {
     }));
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      await handleFetchDataFromUrls();
     } catch (error) {
-      console.error({ error });
       swal({
         type: "danger",
         text: error?.message ?? "Something went wrong!",
